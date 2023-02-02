@@ -1,0 +1,21 @@
+.main-dashboard {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  gap: 50px;
+}
+
+@media screen and (min-width: 760px) {
+  .main-dashboard {
+    flex-direction: row;
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .main-dashboard {
+    width: 60%;
+  }
+}

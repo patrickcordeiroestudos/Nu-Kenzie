@@ -1,0 +1,19 @@
+.banner-info {
+  display: none;
+}
+
+.banner-info img {
+  width: 380px;
+}
+
+@media screen and (min-width: 768px) {
+  .banner-info {
+    display: flex;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .banner-info img {
+    width: 100%;
+  }
+}

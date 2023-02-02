@@ -1,0 +1,18 @@
+:root {
+  /* Primary Palette */
+  /* Essas cores deverão ser utilizadas para compor as principais seções, onde essas cores irão ser norteadoras para fixar as cores da identidade visual da marca. */
+
+  --color-primary: #fd377e;
+  --color-primary-2: #e34981;
+  --color-secondary: #03b896;
+
+  /* Grey Scale Palette */
+  /* Essas cores deverão ser utilizadas em elementos como botões, textos e background’s. Dessa forma a aplicação irá obter de uma hierarquia visual por meio das variações entre as tonalidades. */
+
+  --grey-4: #212529;
+  --grey-3: #868e96;
+  --grey-2: #e9ecef;
+  --grey-1: #f8f9fa;
+
+  --font-base: "Nunito", sans-serif;
+}
