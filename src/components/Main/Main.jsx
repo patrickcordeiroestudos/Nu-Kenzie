@@ -1,56 +1,150 @@
 import Card from "../Card/card";
 import Form from "../Form/Form";
-import { useState } from "react";
 import "./style.css";
 
-function Main({ listTransactions, setListTransactions }) {
-  const [saldo, setSaldo] = useState(0);
-  const [saveTransaction, setSaveTransaction] = useState("");
-
+function Main({
+  listOfEntries,
+  setListOfEntries,
+  listOfExits,
+  setListOfExits,
+  listOfAllTransactions,
+  setlistOfAllTransactions,
+  isEntry,
+  setIsEntry,
+  isExit,
+  setIsExit,
+  isAllTransactions,
+  setIsAllTransactions,
+  saldo,
+  setSaldo,
+}) {
   function removeCard(event) {
-    let newArray = listTransactions.filter((transaction, index) => {
-      return index !== Number(event.id) - 1;
-    });
-    setListTransactions([...newArray]);
-    listTransactions[Number(event.id) - 1].type === "Entrada"
-      ? setSaldo(saldo - listTransactions[Number(event.id) - 1].value)
-      : setSaldo(saldo + listTransactions[Number(event.id) - 1].value);
+    if (event.classList.contains("saida")) {
+      let card = listOfExits.find((elem) => elem.description === event.id);
+
+      let newArray = listOfExits.filter((elem) => {
+        return elem.description !== event.id;
+      });
+      setListOfExits([...newArray]);
+      setSaldo(saldo + Number(card.value));
+      console.log(newArray);
+    } else {
+      let card = listOfEntries.find((elem) => elem.description === event.id);
+
+      let newArray = listOfEntries.filter((elem) => {
+        return elem.description !== event.id;
+      });
+      setListOfEntries([...newArray]);
+      setSaldo(saldo - Number(card.value));
+    }
   }
 
   function filterAll(event) {
-    setListTransactions(listTransactions);
+    setIsAllTransactions(true);
+    setIsEntry(false);
+    setIsExit(false);
   }
 
   function filterEntradas() {
-    const entradas = listTransactions.filter((transaction) => {
-      return transaction.type === "Entrada";
-    });
-    setSaveTransaction(listTransactions);
-    setListTransactions(entradas);
+    setIsEntry(true);
+    setIsExit(false);
+    setIsAllTransactions(false);
   }
 
   function filterSaidas() {
-    const saidas = listTransactions.filter((transaction) => {
-      return transaction.type === "Saída";
-    });
-    setSaveTransaction(listTransactions);
-    setListTransactions(saidas);
+    setIsExit(true);
+    setIsEntry(false);
+    setIsAllTransactions(false);
   }
+
+  const resume = () => {
+    if (isEntry) {
+      if (listOfEntries.length === 0) {
+        return (
+          <>
+            <h2>Você ainda não possui nenhum lançamento</h2>
+            <div>
+              <img src="./img/NoCard.png" alt="" />
+            </div>
+          </>
+        );
+      } else {
+        return listOfEntries.map((transaction, index) => {
+          return (
+            <Card
+              transaction={transaction}
+              key={index}
+              id={transaction.description}
+              removeCard={removeCard}
+            />
+          );
+        });
+      }
+    } else if (isExit) {
+      if (listOfExits.length === 0) {
+        return (
+          <>
+            <h2>Você ainda não possui nenhum lançamento</h2>
+            <div>
+              <img src="./img/NoCard.png" alt="" />
+            </div>
+          </>
+        );
+      } else {
+        return listOfExits.map((transaction, index) => {
+          return (
+            <Card
+              transaction={transaction}
+              key={index}
+              id={transaction.description}
+              removeCard={removeCard}
+            />
+          );
+        });
+      }
+    } else {
+      if (listOfAllTransactions.length === 0) {
+        return (
+          <>
+            <h2>Você ainda não possui nenhum lançamento</h2>
+            <div>
+              <img src="./img/NoCard.png" alt="" />
+            </div>
+          </>
+        );
+      } else {
+        return listOfAllTransactions.map((transaction, index) => {
+          return (
+            <Card
+              transaction={transaction}
+              key={index}
+              id={transaction.description}
+              removeCard={removeCard}
+            />
+          );
+        });
+      }
+    }
+  };
 
   return (
     <>
       <section className="section-form">
         <Form
-          listTransactions={listTransactions}
-          setListTransactions={setListTransactions}
+          listOfEntries={listOfEntries}
+          setListOfEntries={setListOfEntries}
+          listOfExits={listOfExits}
+          setListOfExits={setListOfExits}
+          listOfAllTransactions={listOfAllTransactions}
+          setlistOfAllTransactions={setlistOfAllTransactions}
           saldo={saldo}
           setSaldo={setSaldo}
         />
-        {listTransactions.length !== 0 && (
+        {listOfAllTransactions.length !== 0 && (
           <div className="card-total">
             <div>
               <h3>Valor Total:</h3>
-              <p>O valor se refere ao saldo</p>
+              <p>O valor se refere ao saldo total da conta</p>
             </div>
             <span>
               {saldo.toLocaleString("pt-BR", {
@@ -79,25 +173,8 @@ function Main({ listTransactions, setListTransactions }) {
             </button>
           </div>
         </div>
-        {listTransactions.length === 0 ? (
-          <>
-            <h2>Você ainda não possui nenhum lançamento</h2>
-            <div>
-              <img src="./img/NoCard.png" alt="" />
-            </div>
-          </>
-        ) : (
-          listTransactions.map((transaction, index) => {
-            return (
-              <Card
-                transaction={transaction}
-                key={index}
-                id={index}
-                removeCard={removeCard}
-              />
-            );
-          })
-        )}
+
+        {resume()}
       </section>
     </>
   );
