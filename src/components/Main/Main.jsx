@@ -131,6 +131,9 @@ function Main({
     <>
       <section className="section-form">
         <Form
+          setIsAllTransactions={setIsAllTransactions}
+          setIsEntry={setIsEntry}
+          setIsExit={setIsExit}
           listOfEntries={listOfEntries}
           setListOfEntries={setListOfEntries}
           listOfExits={listOfExits}

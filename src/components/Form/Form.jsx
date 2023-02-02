@@ -9,6 +9,9 @@ function Form({
   setlistOfAllTransactions,
   saldo,
   setSaldo,
+  setIsAllTransactions,
+  setIsEntry,
+  setIsExit,
 }) {
   return (
     <form
@@ -59,6 +62,10 @@ function Form({
         event.target[2].value === "Saída"
           ? setSaldo(saldo - Number(event.target[1].value))
           : setSaldo(saldo + Number(event.target[1].value));
+
+        setIsAllTransactions(true);
+        setIsEntry(false);
+        setIsExit(false);
       }}
     >
       <label htmlFor="">Descrição</label>
