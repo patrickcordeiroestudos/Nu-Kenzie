@@ -5,10 +5,8 @@ function Form({
   setListOfEntries,
   listOfExits,
   setListOfExits,
-  listOfAllTransactions,
-  setlistOfAllTransactions,
-  saldo,
-  setSaldo,
+  balance,
+  setBalance,
   setIsAllTransactions,
   setIsEntry,
   setIsExit,
@@ -26,9 +24,6 @@ function Form({
           document.querySelector("#value-transaction").value;
         const typeTransaction =
           document.querySelector("#type-transaction").value;
-        console.log(descriptionTransaction);
-        console.log(valueTransaction);
-        console.log(typeTransaction);
 
         if (typeTransaction === "Entrada") {
           setListOfEntries([
@@ -49,29 +44,19 @@ function Form({
             },
           ]);
         }
-
-        // if (listOfAllTransactions.length > 0) {
-        //   const total = listOfAllTransactions.reduce(
-        //     (lastValue, actualValue) => {
-        //       return Number(lastValue.value) + Number(actualValue.value);
-        //     }
-        //   );
-        //   console.log(total);
-        // }
-
-        event.target[2].value === "Saída"
-          ? setSaldo(saldo - Number(event.target[1].value))
-          : setSaldo(saldo + Number(event.target[1].value));
-
         setIsAllTransactions(true);
         setIsEntry(false);
         setIsExit(false);
+
+        typeTransaction === "Saída"
+          ? setBalance(balance - Number(valueTransaction))
+          : setBalance(balance + Number(valueTransaction));
       }}
     >
       <label htmlFor="">Descrição</label>
       <input
         type="text"
-        placeholder="Digite aqui sua descrição"
+        placeholder="Descreva sua transação"
         required
         id="description-transaction"
       />

@@ -1,6 +1,6 @@
 import "./style.css";
 
-function Header({ setBotaoIniciar }) {
+function Header({ sethomeButton }) {
   return (
     <header className="header">
       <div className="container-header">
@@ -11,8 +11,8 @@ function Header({ setBotaoIniciar }) {
         </div>
         <div>
           <button
-            className="button-iniciar"
-            onClick={() => setBotaoIniciar(false)}
+            className="header-button"
+            onClick={() => sethomeButton(false)}
           >
             Inicio
           </button>

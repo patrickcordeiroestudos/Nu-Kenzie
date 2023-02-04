@@ -1,9 +1,9 @@
-import Header from "../Header/Header";
-import Main from "../Main/Main";
+import Header from "../../components/Header/Header";
+import Main from "../../components/Main/Main";
 import "./style.css";
 
 function Dashboard({
-  setBotaoIniciar,
+  sethomeButton,
   listOfEntries,
   setListOfEntries,
   listOfExits,
@@ -16,12 +16,12 @@ function Dashboard({
   setIsExit,
   isAllTransactions,
   setIsAllTransactions,
-  saldo,
-  setSaldo,
+  balance,
+  setBalance,
 }) {
   return (
     <>
-      <Header setBotaoIniciar={setBotaoIniciar} />
+      <Header sethomeButton={sethomeButton} />
       <main className="main-dashboard">
         <Main
           listOfEntries={listOfEntries}
@@ -36,8 +36,8 @@ function Dashboard({
           setIsExit={setIsExit}
           isAllTransactions={isAllTransactions}
           setIsAllTransactions={setIsAllTransactions}
-          saldo={saldo}
-          setSaldo={setSaldo}
+          balance={balance}
+          setBalance={setBalance}
         />
       </main>
     </>

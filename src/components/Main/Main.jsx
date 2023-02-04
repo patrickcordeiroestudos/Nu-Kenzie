@@ -13,51 +13,56 @@ function Main({
   setIsEntry,
   isExit,
   setIsExit,
-  isAllTransactions,
   setIsAllTransactions,
-  saldo,
-  setSaldo,
+  balance,
+  setBalance,
 }) {
   function removeCard(event) {
-    if (event.classList.contains("saida")) {
-      let card = listOfExits.find((elem) => elem.description === event.id);
+    const isCardExit = event.classList.contains("saida");
 
-      let newArray = listOfExits.filter((elem) => {
+    if (isCardExit) {
+      let cardToExit = listOfExits.find(
+        (elem) => elem.description === event.id
+      );
+
+      let newListOfExits = listOfExits.filter((elem) => {
         return elem.description !== event.id;
       });
-      setListOfExits([...newArray]);
-      setSaldo(saldo + Number(card.value));
-      console.log(newArray);
+
+      setListOfExits([...newListOfExits]);
+      setBalance(balance + Number(cardToExit.value));
     } else {
-      let card = listOfEntries.find((elem) => elem.description === event.id);
+      let cardEntry = listOfEntries.find(
+        (elem) => elem.description === event.id
+      );
 
-      let newArray = listOfEntries.filter((elem) => {
+      let newListOfEntries = listOfEntries.filter((elem) => {
         return elem.description !== event.id;
       });
-      setListOfEntries([...newArray]);
-      setSaldo(saldo - Number(card.value));
+      setListOfEntries([...newListOfEntries]);
+      setBalance(balance - Number(cardEntry.value));
     }
   }
 
-  function filterAll(event) {
+  function filterAll() {
     setIsAllTransactions(true);
     setIsEntry(false);
     setIsExit(false);
   }
 
-  function filterEntradas() {
+  function filterEntries() {
     setIsEntry(true);
     setIsExit(false);
     setIsAllTransactions(false);
   }
 
-  function filterSaidas() {
+  function filterExits() {
     setIsExit(true);
     setIsEntry(false);
     setIsAllTransactions(false);
   }
 
-  const resume = () => {
+  function renderCardsByFilters() {
     if (isEntry) {
       if (listOfEntries.length === 0) {
         return (
@@ -125,7 +130,7 @@ function Main({
         });
       }
     }
-  };
+  }
 
   return (
     <>
@@ -140,8 +145,8 @@ function Main({
           setListOfExits={setListOfExits}
           listOfAllTransactions={listOfAllTransactions}
           setlistOfAllTransactions={setlistOfAllTransactions}
-          saldo={saldo}
-          setSaldo={setSaldo}
+          balance={balance}
+          setBalance={setBalance}
         />
         {listOfAllTransactions.length !== 0 && (
           <div className="card-total">
@@ -150,7 +155,7 @@ function Main({
               <p>O valor se refere ao saldo total da conta</p>
             </div>
             <span>
-              {saldo.toLocaleString("pt-BR", {
+              {balance.toLocaleString("pt-BR", {
                 style: "currency",
                 currency: "BRL",
               })}
@@ -168,16 +173,16 @@ function Main({
             >
               Todos
             </button>
-            <button className="button-filtros" onClick={() => filterEntradas()}>
+            <button className="button-filtros" onClick={() => filterEntries()}>
               Entradas
             </button>
-            <button className="button-filtros" onClick={() => filterSaidas()}>
+            <button className="button-filtros" onClick={() => filterExits()}>
               Despesas
             </button>
           </div>
         </div>
 
-        {resume()}
+        {renderCardsByFilters()}
       </section>
     </>
   );

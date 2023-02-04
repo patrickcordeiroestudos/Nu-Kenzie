@@ -1,18 +1,17 @@
 import { useState, useEffect } from "react";
-import PaginaInicial from "./components/PaginaInicial/PaginaInicial";
+import HomePage from "./pages/Homepage/Homepage";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import "./App.css";
-import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
-  // const [listTransactions, setListTransactions] = useState([]);
   const [listOfEntries, setListOfEntries] = useState([]);
   const [listOfExits, setListOfExits] = useState([]);
   const [listOfAllTransactions, setlistOfAllTransactions] = useState([]);
-  const [botaoIniciar, setBotaoIniciar] = useState(false);
+  const [homeButton, sethomeButton] = useState(false);
   const [isEntry, setIsEntry] = useState(false);
   const [isExit, setIsExit] = useState(false);
   const [isAllTransactions, setIsAllTransactions] = useState(true);
-  const [saldo, setSaldo] = useState(0);
+  const [balance, setBalance] = useState(0);
 
   useEffect(() => {
     setlistOfAllTransactions([...listOfEntries, ...listOfExits]);
@@ -20,14 +19,14 @@ function App() {
 
   return (
     <>
-      {botaoIniciar === false ? (
-        <div className="pagina-inicial">
-          <PaginaInicial setBotaoIniciar={setBotaoIniciar} />
+      {homeButton === false ? (
+        <div className="homepage">
+          <HomePage sethomeButton={sethomeButton} />
         </div>
       ) : (
         <div className="dashboard">
           <Dashboard
-            setBotaoIniciar={setBotaoIniciar}
+            sethomeButton={sethomeButton}
             listOfEntries={listOfEntries}
             setListOfEntries={setListOfEntries}
             listOfExits={listOfExits}
@@ -40,8 +39,8 @@ function App() {
             setIsExit={setIsExit}
             isAllTransactions={isAllTransactions}
             setIsAllTransactions={setIsAllTransactions}
-            saldo={saldo}
-            setSaldo={setSaldo}
+            balance={balance}
+            setBalance={setBalance}
           />
         </div>
       )}

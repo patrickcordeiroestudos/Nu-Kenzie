@@ -12,7 +12,7 @@ function Card({ transaction, id, removeCard }) {
       </div>
       <div className="card2">
         <p className="card-value">
-          {transaction.value.toLocaleString("pt-BR", {
+          {Number(transaction.value).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
           })}

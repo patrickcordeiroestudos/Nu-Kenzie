@@ -20,7 +20,7 @@
   cursor: pointer;
 }
 
-.button-iniciar {
+.header-button {
   background-color: var(--grey-2);
   width: 64px;
   padding: 10px;
@@ -33,7 +33,7 @@
   cursor: pointer;
 }
 
-.button-iniciar:hover {
+.header-button:hover {
   background-color: var(--grey-4);
 }
 

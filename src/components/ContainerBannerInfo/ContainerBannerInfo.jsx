@@ -4,7 +4,7 @@ function ContainerBannerInfo() {
   return (
     <section className="banner-info">
       <figure>
-        <img src="./img/bannerIndex.png" alt="" />
+        <img src="./img/bannerIndex.png" alt="banner" />
       </figure>
     </section>
   );
