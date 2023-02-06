@@ -88,6 +88,6 @@ $ yarn start
 
 ## 📝 Licença
 
-Este projeto esta sobe a licença MIT.
+Este projeto esta sob a licença MIT.
 
 Feito com ❤️ por Patrick Cordeiro 👋🏽 [Entre em contato!](https://www.linkedin.com/in/patrickcordeiro/)
